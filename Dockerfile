@@ -25,6 +25,7 @@ RUN set -x \
         "nasm=${NASM_VERSION}-r0" \
         wget \
         alpine-sdk \
+        cdrkit \
     && mkdir -p ${BOOTERIFY_PATH} \
     && mkdir /temp \
     && cd /temp \

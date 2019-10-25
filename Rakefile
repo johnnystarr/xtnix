@@ -1,6 +1,8 @@
 desc 'Local development tasks'
 task default: %w[
   dev:build
+  dev:run
+  clean
 ]
 
 desc 'Setup local development environment'
@@ -10,13 +12,23 @@ task setup: %w[
 
 container = 'xtnix-tools'
 
-# make wrapper using Docker image
-make = "docker run -it --rm --name make -v #{Dir.pwd}/src:/root -w /root #{container} make"
+# command wrapper using Docker image
+def docker_cmd(cmd, container)
+  "docker run -it --rm --name #{cmd} -v #{Dir.pwd}/src:/root -w /root #{container} #{cmd}"
+end
+
+make   = docker_cmd('make', container)
+bin_sh = docker_cmd('sh', container)
 
 namespace :dev do
   desc 'Build XTNIX'
   task :build do
     sh make
+  end
+
+  desc 'Connect to container'
+  task :connect do
+    sh bin_sh
   end
 
   desc 'Run XTNIX in DOSBox'
@@ -28,8 +40,13 @@ end
 
 namespace :release do
   desc 'Create 360K floppy disk of XTNIX'
-  task :disk do
+  task :floppy do
     sh "#{make} floppy"
+  end
+
+  desc 'Create ISO for CDROM booting of XTNIX'
+  task :iso do
+    sh "#{make} iso"
   end
 end
 
@@ -46,4 +63,5 @@ task :clean do
   sh 'rm -f dist/*'
   sh 'rm -f src/*.com'
   sh 'rm -f src/*.flp'
+  sh 'rm -f src/*.iso'
 end
