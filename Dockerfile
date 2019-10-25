@@ -31,8 +31,7 @@ RUN set -x \
     && tar xvf ${BOOTERIFY_TGZ} \
     && rm -f ${BOOTERIFY_TGZ} \
     && cd ${BOOTERIFY_PATH}/booterify-${BOOTERIFY_VERSION} \
-    && make \
-    && ./booterify -h
+    && make
 
 #-------------------------------------------------------------------------------
 #  Entrypoint
