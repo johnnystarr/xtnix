@@ -11,7 +11,7 @@ task setup: %w[
 container = 'xtnix-tools'
 
 # make wrapper using Docker image
-make = "docker run -it --rm --name make -v '#{Dir.pwd}/src:/root' -w /root #{container} make"
+make = "docker run -it --rm --name make -v #{Dir.pwd}/src:/root -w /root #{container} make"
 
 namespace :dev do
   desc 'Build XTNIX'
@@ -27,10 +27,9 @@ namespace :dev do
 end
 
 namespace :release do
-  desc 'Create 360K disk of XTNIX'
+  desc 'Create 360K floppy disk of XTNIX'
   task :disk do
-    sh "#{make} disk"
-    sh 'mv ../src/*.[com|flp] ../dist'
+    sh "#{make} floppy"
   end
 end
 
