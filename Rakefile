@@ -6,4 +6,5 @@ end
 
 task :clean do
   sh 'rm -f ibm-xt.conf'
+  sh 'rm -f dist/*'
 end
