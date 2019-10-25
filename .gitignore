@@ -1,2 +1,4 @@
 .idea/
 ./ibm-xt.conf
+*.com
+*.flp

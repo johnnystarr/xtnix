@@ -26,12 +26,14 @@ RUN set -x \
         wget \
         alpine-sdk \
     && mkdir -p ${BOOTERIFY_PATH} \
-    && cd ${BOOTERIFY_PATH} \
+    && mkdir /temp \
+    && cd /temp \
     && wget ${BOOTERIFY_URI} \
     && tar xvf ${BOOTERIFY_TGZ} \
-    && rm -f ${BOOTERIFY_TGZ} \
-    && cd ${BOOTERIFY_PATH}/booterify-${BOOTERIFY_VERSION} \
-    && make
+    && cd booterify-${BOOTERIFY_VERSION} \
+    && make all \
+    && mv * ${BOOTERIFY_PATH} \
+    && rm -rf /temp
 
 #-------------------------------------------------------------------------------
 #  Entrypoint
