@@ -4,6 +4,9 @@ bits 16
 	org     100h                ; default com location
 
 	jmp short bootstrap
+
+	%include "./version.inc"
+	%include "./kernel/kernel.inc"
 	%include "./kernel/write.asm"
 
 bootstrap:
@@ -20,4 +23,4 @@ bootstrap:
 	ret
 
 booting: db "Booting XTNIX...", 0
-str: db "XTNIX v1.1.0", 0
+str: db "XTNIX ", VERSION, 0

@@ -17,4 +17,4 @@ kernel_write:
             int     10h             ; output carriage return
             mov     al, 0ah         ; new line
             int     10h             ; output new line
-.nc:        ret     si              ; return
+.nc:        ret                     ; return
