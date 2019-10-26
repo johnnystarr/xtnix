@@ -11,8 +11,8 @@ bits 16
 
 bootstrap:
     mov     ah, 0x00
-	mov     al, 0x03  ; text mode 80x25 16 colors, clear screen
-	int     10h
+    mov     al, 0x03  ; text mode 80x25 16 colors, clear screen
+    int     10h
     mov     si, booting
     call    kernel_write
 
