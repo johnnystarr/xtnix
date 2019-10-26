@@ -1,8 +1,7 @@
 desc 'Local development tasks'
 task default: %w[
-  dev:build
+  release:floppy
   dev:run
-  clean
 ]
 
 desc 'Setup local development environment'
@@ -41,7 +40,12 @@ end
 namespace :release do
   desc 'Create 360K floppy disk of XTNIX'
   task :floppy do
-    sh "#{make} floppy"
+    sh "#{make} floppy360"
+  end
+
+  desc 'Create 1.4M floppy disk of XTNIX'
+  task :floppy1440 do
+    sh "#{make} floppy1440"
   end
 
   desc 'Create ISO for CDROM booting of XTNIX'

@@ -1,6 +1,7 @@
 ;------------------------------------------------------------------------------
 ;  kernel_write 0.1.0
-;  input:
+;  input: SI    = 16-bit address of string
+;  input: DL:d0 = No carriage return if set
 ;------------------------------------------------------------------------------
 kernel_write:
 .do:        lodsb                   ; loads next byte to al, (inc si)
@@ -16,5 +17,4 @@ kernel_write:
             int     10h             ; output carriage return
             mov     al, 0ah         ; new line
             int     10h             ; output new line
-.nc:        ret                     ; return
-
+.nc:        ret     si              ; return

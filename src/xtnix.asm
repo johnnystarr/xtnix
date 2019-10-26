@@ -3,12 +3,21 @@ bits 16
 
 	org     100h                ; default com location
 
-	jmp short start
+	jmp short bootstrap
 	%include "./kernel/write.asm"
 
-start:
+bootstrap:
+	mov     ah, 0x00
+    mov     al, 0x03  ; text mode 80x25 16 colors, clear screen
+    int     10h
+	mov     si, booting
+	call    kernel_write
+
+	; TODO: add other boot cycles here
+
 	mov     si, str
 	call    kernel_write
 	ret
 
-str:    db "XTNIX v0.1.0", 0
+booting: db "Booting XTNIX...", 0
+str: db "XTNIX v1.1.0", 0
