@@ -1,10 +1,15 @@
 ;------------------------------------------------------------------------------
 ;  kernel_write 0.1.0
 ;  input: SI    = 16-bit address of string
-;  input: DH: TODO: implement DH = file descriptor (see kernel.inc)
+;  input: DH:   = 0 STDIN, 1 STDOUT, 2 STDERR
 ;  input: DL:d0 = No carriage return if set
 ;------------------------------------------------------------------------------
 kernel_write:
+    push    ax              ; preserve ax in case its used
+    cmp     dh, STDERR
+    je      .stderr
+    cmp     dh, STDIN
+    je      .stdin
 .do:
     lodsb                   ; loads next byte to al, (inc si)
     cmp     al, 0           ; at the end of our string?
@@ -21,4 +26,12 @@ kernel_write:
     mov     al, 0ah         ; new line
     int     10h             ; output new line
 .nc:
+    pop     ax              ; restore ax
     ret                     ; return
+
+.stdin:
+    pop     ax              ; restore ax
+    ret                     ; TODO: implement input to procs
+.stderr:
+    pop     ax              ; restore ax
+    ret                     ; TODO: implement error messages

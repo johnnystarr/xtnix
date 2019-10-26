@@ -13,11 +13,14 @@ bootstrap:
     mov     ah, 0x00
     mov     al, 0x03  ; text mode 80x25 16 colors, clear screen
     int     10h
+
+    mov     dh, STDOUT
     mov     si, booting
     call    kernel_write
 
     ; TODO: add other boot cycles here
 
+    mov     dh, STDOUT
     mov     si, str
     call    kernel_write
     ret
