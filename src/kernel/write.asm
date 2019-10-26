@@ -1,6 +1,7 @@
 ;------------------------------------------------------------------------------
 ;  kernel_write 0.1.0
 ;  input: SI    = 16-bit address of string
+;  input: DH: TODO: implement DH = file descriptor (see kernel.inc)
 ;  input: DL:d0 = No carriage return if set
 ;------------------------------------------------------------------------------
 kernel_write:
